@@ -1,0 +1,57 @@
+\section{Introduction}
+The use of drones as a means of automating tasks that are currently being 
+performed manually are becoming ubiquitous 
+\cite{application1cardiac, application2forestfires, blindrunnersdrone,PowerlineFollower}. 
+These applications can vary from using drones as a means of package delivery, 
+object tracking and entertainment purposes. Many of these applications require 
+behavior from the device that includes autonomy, which in itself is a very complex
+defined set of behaviors. Many applications for the drone
+still require manually controlling of the device in order to perform intelligent behavior. 
+The rise of new implementations of autonomous drones therefore provides the challenge 
+to find new practices in which automating these tasks is possible. 
+
+Many of these applications are based on the behavior of tracking an object. 
+The task of keeping a certain object in view of the drone, is a type of behavior 
+that can be used in a variety of practices. The most effective solution would 
+be to have the drone keep an object in its field of vision using a camera.
+The tracking of an object has recently been applied to follow a powerline 
+in order to perform maintenance \cite{PowerlineFollower}. 
+This implementation raises the question whether this would also be possible 
+for the tracking of persons in a variety of environments. Already established practices
+have been the tracking of athletes while filming \cite{application3sports} and 
+guiding blind people in the streets \cite{blindrunnersdrone}. In these environments, 
+the drones are able to accurately track and maintain their distance from an object, 
+while simultaneously keeping the object in sight. 
+
+However, some applications require smaller devices and therefore, lower computational models
+in order to achieve the same type of behavior. As an example, the purpose
+f a drone camera that can automatically take pictures and/or record an 
+individual in indoor environments. Smaller devices have computational limitations 
+as well as physical limitations that need to be taken into account. 
+These devices, referred to as Embedded Devices (ED), can be defined as having been 
+produced with a specific function in mind \cite{embeddedsystem}. Per definition, 
+these devices can be categorized as everything between a coffeemaker and mobile 
+phones. In most cases, these EDs lack GPU power, which limits them from performing 
+heavy computations. Therefore, when developing models for these devices, it is 
+necessary to sacrifices model accuracy for overall speed of inference. At the same time, certain 
+technologies used in obstacle detection become problematic since these 
+could outweigh the carrying capacity of the drone. Therefore, many of the techniques 
+used in developing the follow-me drones, can not be used in indoor applications. 
+The need for the application of these technologies on EDs is therefore still relevant. 
+
+Recently, the rise in using Deep Neural Networks applied to robotics could show 
+promising possibilities for these problems. These neural 
+networks are used in the context of Machine Learning \cite{neuralnets}.
+A specific way in which these can be applied, is in a Reinforcement Learning (RL) 
+application. This method is most useful in applications where there is a necessity 
+to map actions to certain environmental states and the annotation of these state is 
+too large to perform manually. These RL agents thrive in decision 
+making problems where the agent is able to explore the environment itself and correct 
+itself according to a pre-determined reward function. Applying this to the use of 
+indoor follow-me drones would be an interesting challenge. Furthermore, a pitfall is that 
+training in real-time is an unreasonable endeavour since RL requires a vast amount of 
+training instances for the learning process. Therefore, simulation environments
+will be considered as a possibility for the algorithm to learn in an offline environment 
+before being deployed in the real-world. Optimizing the process of training and deployment of
+an agent to perform follow-me behavior on a drone is therefore an active field of 
+research. 

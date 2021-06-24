@@ -1,0 +1,119 @@
+\section{Introduction}
+Drones are increasingly becoming ubiquitous throughout every day life \cite{riseofdrones}. 
+Initially developed for military purposes, drone usage is increasingly moving towards everyday 
+applications. From package delivery to calimity relief \cite{application2forestfires}, 
+the clear benefit of using drones is that they provide a safe tool for a variety of tasks 
+that normally either endanger or encumber people. By automating these processes, dangerous 
+jobs could be made safer. At the same time, the use of drones can also make new applications 
+available that were previously unavailable, opening up new places where the utilization of 
+drones could be helpful. Whether it is for automated maintenance \cite{PowerlineFollower}, 
+health care applications \cite{blindrunnersdrone,application1cardiac}, 
+calimity relief \cite{application2forestfires} or even entertainment purposes \cite{application3sports}, 
+drones are becoming a part of a larger body of research that could provide interesting solutions 
+to real-world problems. 
+
+One way in which drones can be used, is the tracking of objects \cite{ParrotARDrone}. 
+The ability of a drone to keep an object within its field of vision is a type of 
+behavior that can be used in a large variety of applications. Some already explored examples 
+are the use of drones as a means of following powerlines and performing overall 
+maintenance \cite{PowerlineFollower}, or as a tool for guiding blind runners through 
+their jog and helping them avoid collisions \cite{blindrunnersdrone}. These applications 
+require the drone to keep a certain object within their view and maintain this state, 
+while performing an additional task. A crucial aspect of object tracking involves 
+object localization, which can then be used to automate the process of keeping an 
+object in its vision. 
+
+However, it is important to note, that the target object to be followed can bring with it 
+different challenges and requirements for the development of the drone behavior. An 
+important distinction herein is the difference between tracking a moving versus a static object. 
+Additionally, following a person, with all of its dynamic movements and paths, brings with it 
+different challenges than the following of more stable moving objects. 
+At the same time, the applicability of drones being able to follow a person are wide. From the 
+previously mentioned blind runners \cite{blindrunnersdrone}, to the filming of people from 
+specific perspectives \cite{FrontalViewRL}, there are multiple avenues that could be aided 
+by automated person tracking. Therefore, investigating different manners in which to achieve 
+person following behavior, henceforth follow-me behavior, is still an interesting topic to 
+explore.
+
+A subset of applications require, or benefit from, the ability of 
+autonomous decision making by the drone. Not all real-world situations can be predicted and 
+programmed into the drone in order to ensure correct behavior in each of them. The automated 
+agent would be required to reason on what to perform in situations not anticipated by 
+the developing team. The requirement of autonomy translates into the need 
+for generalizability. The follow-me behavior is no exception. In order to fully 
+be capable of keeping a person in its Field of Vision (FoV), the drone would be required 
+to be able to extrapolate behavior to newly unforeseen situations, requiring a certain 
+degree of generalizability.
+
+This is where neural networks come into the picture. The recent rise of Deep Learning 
+has shown that the utilization of machine learning is applicable in a large variety 
+of different problems \cite{riseofneuralnets}. One of the advantages of using neural networks
+is their ability to generalize from training data to new previously unseen instances.
+One of such examples is the ability of an image classsifier to correctly classify images 
+that are not contained in the dataset that was used for its training. This 
+generalizability is very well suited for the development of autonomy in robotic systems. 
+The use of neural networks for the problem of object tracking is, therefore, still relevant.
+
+Looking specifically at robotic systems and autonomous behavior, the application of neural 
+networks in the field of Reinforcement Learning (RL) has also seen a tremendous boom in 
+recent years \cite{riseofrl}. The field of RL can be illustrated by the learning of behavior 
+in a manner similar to that of humans. In essence, RL is a formalization of classical 
+conditioning seen in animal behavior that works by allowing an agent to explore 
+some action space and receiving a reward or punishment as a learning stimuli \cite{RLBook}. 
+The agent adapts itself according to this reward and thus learns how to accomplish its goal. 
+Giving an agent a certain amount of training and/or exploration time in an environment, 
+the agent will train itself to map each state to a most preferred action. However, more 
+complex environments where RL algorithms 
+could provide a solution, require a large amount of data to be processed. This is where 
+neural networks provide a valuable solution. Being driven by large amounts of data,
+they allow RL agents the ability to process a large 
+amount of experiential data for their training. Furthermore, using neural networks in a 
+context of RL also provides the ability to generalize to new situations not encountered 
+during an autonomous agent's training time. 
+These advantages of neural networks provide a good addition to the RL algorithm, giving it 
+a robust ability to be applicable in many situations where autonomous behavior is required.
+The use of neural networks in RL problems, also called Deep Reinforcement Learning (DRL), can 
+therefore be considered a useful paradigm to investigate its applicability in follow-me behavior. 
+
+\subsection{Goal} \label{limitations}
+This dissertation will investigate whether the use of Reinforcement Learning is a viable means 
+to develop the desired follow-me behavior in an autonomous drone. Furthermore, the 
+developed algorithm from this thesis is to be used to take control of a physical standalone 
+drone outside of the simulation. In order to achieve this, this endeavour will be subdivided 
+in four sub-problems. The first two will suggest improvements on RL methods that should help 
+the training process and the resulting behavior. The first of these will be to see whether 
+sensing directionality will improve the drone's behavior and the second will be to see 
+whether depth sensing improves the behavior. Third, the ability of RL to perform generalization 
+will be investigating. Finally, whether the use of RL is an added benefit compared to more 
+straight-forward methods will also be studied. 
+
+The long-term goal is to implement such an agent on a stand-alone drone and to perform 
+the follow-me behavior outside of the simulation. 
+
+\subsection{Limits} \label{limitations}
+The context in which this thesis has been written does impose some constraints on the 
+possible implementations that can be considered. Having the goal for this agent to be 
+implemented on a standalone drone means that the drone should be able to do all of the 
+required behavior without relying on 
+a connection with any external device. Many applications use the drone device only as a 
+action taker, not as the device to make decisions. This is externalized to 
+a local server or a base-station that performs the processing, which then signals to the 
+drone to perform the actions. However, the aim for this model is to keep all of the 
+processing on the drone itself. This aspect brings with it some 
+problems that pose limitations on what type of models and agents can be considered. 
+
+The first of these limits is the carrying capacity that the drone can have. The computational
+power that the drone can carry 
+and use to make decisions is limited. Moreover, the developed agent needs to be able 
+to perform fast enough on the device in order to actively make decisions in real-time. 
+Throughout this thesis, computational costs and inference times will 
+be taken into account when deciding on what algorithms and agents to implement.
+
+Additionally, in order to limit carrying capacity and computation, the RL state-representation
+for the agent should rely solely on camera inputs. No additional technology to aid in obstacles 
+detections or decision making can be used. This means that each aspect of the state 
+representation has to be formulated within these constraints. Again, these limitations are 
+imposed as a means to reduce the amount of carrying load of the physical drone. 
+
+
+

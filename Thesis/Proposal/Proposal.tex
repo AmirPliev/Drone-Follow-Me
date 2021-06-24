@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+
+%---------------------Packages---------------------
+\usepackage{graphicx}
+\usepackage{multicol, caption}
+\usepackage{amsfonts}
+\usepackage[margin=2.25cm, a4paper]{geometry}
+\usepackage{pdfpages}
+\usepackage{import}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[nottoc,numbib]{tocbibind}
+
+%---------------------Settings--------------------
+%Margins settings
+\setlength{\parskip}{0em}
+\setlength{\columnsep}{0.75cm}
+\addtolength{\topmargin}{0.75cm}
+\addtolength{\textheight}{-2cm}
+
+%hyperlink settings
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newenvironment{Figure}%
+{\par\medskip\noindent\minipage{\linewidth}}%
+{\endminipage\par\medskip}
+
+
+%Image Directory
+\graphicspath{{./Contents/images/}}
+
+
+
+%---------------------START-----------------------
+\begin{document}
+
+    %Self Created Commands
+    \input{Contents/other/commands.tex}
+        
+    %Details
+    \title{Project Proposal \large \\Drone Follow-Me Using Reinforcement Learning}
+    \author{Amir Pliev}
+
+
+    %---------------------CONTENTS----------------------
+    \input{Contents/titlepage}
+
+    \newgeometry{margin=4.5cm}
+    \tableofcontents
+    \newpage
+    \restoregeometry
+
+    \begin{multicols}{2}
+            
+
+        \include{Contents/introduction}
+
+        \include{Contents/literature}
+
+        \include{Contents/researchquestions.tex}
+
+        \input{Contents/methods}
+
+        %\newpage
+
+        %bibliography
+        \bibliographystyle{ieeetr}
+        \bibliography{Contents/references.bib}
+        
+        %Adds the project timeline file
+        %\fakesection{Planning}
+        %\includepdf[pages=-]{Contents/other/ProjectTimeline}
+
+    \end{multicols}
+
+
+
+\end{document}  

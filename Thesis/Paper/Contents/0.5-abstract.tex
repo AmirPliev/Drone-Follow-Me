@@ -1,0 +1,37 @@
+\begin{abstract}
+    \setstretch{1.5}
+
+    The deployment of drones has become increasingly popular in a variety of new applications. 
+    Many of such applications require autonomous and adaptive behaviors, especially when 
+    tasks require the need for dynamic object tracking, such as follow-me behavior.
+    In the past decade, many applications have seen drastic benefits from using machine learning 
+    methods such as Reinforcement Learning (RL). RL uses an animal conditioning based approach
+    in computational tasks to learn new behaviors in specific domains. 
+    In this thesis, the implementation of an RL algorithm is trained and tested inside simulation 
+    environments,
+    specifically for the task of a drone following a person. 
+    This algorithm, a Deep Q-Network (DQN), is tested using four different approaches. 
+    First, two changes to
+    the DQN inputs have been proposed to help improve the training process and performance. These 
+    suggestions include 
+    the use of directionality of objects in its camera inputs using stacked image frames and the 
+    inclusion of depth information about its surroundings using depth maps. Tests have been run 
+    with these additions in two environments, each increasing in obstacle complexity. The results have 
+    shown that the use of stacked imaging resulted in improvements in environments where 
+    they relay valuable information to the agent about the objects in its view. Meanwhile, in 
+    environments where the task can be performed without it, they unnecessarily increase the 
+    state-space, resulting in degraded performance. Depth images have shown to be a strong 
+    improvements to each agent that used them, further reinforcing their strong simplifying 
+    capabilities and reduction of state-space. Second, the  
+    benefits of using RL compared to a static preprogrammed baseline have been evaluated. These 
+    tests have shown that RL allows for much more adaptive and flexible behavior, which is beneficial 
+    in each type of environment. 
+    Finally, the ability of RL agents to generalize behavior 
+    from simpler environments to a third, more complex environment has also been examined.
+    This showed that the agents who were trained in an environment with obstacles, were able 
+    to transfer their knowledge to new similarly designed situations. Meanwhile, agents that had 
+    never seen an obstacle could not. These results show that the use of RL in the specific 
+    task of follow-me behavior or drones is a successful tool because of their adaptive and 
+    generalizable behavior. 
+
+\end{abstract}

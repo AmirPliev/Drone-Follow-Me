@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+
+%---------------------Packages---------------------
+\usepackage{graphicx}
+\usepackage{multicol, caption}
+\usepackage{amsfonts}
+\usepackage[margin=2.25cm, a4paper]{geometry}
+\usepackage{pdfpages}
+\usepackage{import}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{setspace}
+\usepackage[normalem]{ulem}
+\usepackage{fancyhdr}
+\usepackage{sidecap}
+\usepackage{float}
+\useunder{\uline}{\ul}{}
+
+%---------------------Settings--------------------
+%Margins settings
+\setlength{\parskip}{0em}
+\setlength{\columnsep}{0.75cm}
+\addtolength{\topmargin}{0.75cm}
+\addtolength{\textheight}{-2cm}
+\setlength{\intextsep}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+
+\pagestyle{fancy}
+\fancyhead[L]{}
+
+%hyperlink settings
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newenvironment{Figure}%
+{\par\medskip\noindent\minipage{\linewidth}}%
+{\endminipage\par\medskip}
+
+
+%Image Directory
+\graphicspath{{./Contents/images/}}
+
+
+
+%---------------------START-----------------------
+\begin{document}
+
+    %Self Created Commands
+    \input{Contents/other/commands.tex}
+        
+    %Details
+    \title{Project Proposal \large \\Drone Follow-Me Using Reinforcement Learning}
+    \author{Amir Pliev}
+
+
+    %---------------------CONTENTS----------------------
+    \input{Contents/0-titlepage}
+    
+    \include{Contents/0.5-abstract.tex}
+
+    \newgeometry{margin=4.5cm}
+    \thispagestyle{empty}
+    \listoffigures
+    \thispagestyle{empty}
+    \listoftables
+    \newpage
+    
+    \thispagestyle{empty}
+    \tableofcontents
+    \thispagestyle{empty}
+    \newpage
+    \restoregeometry
+    
+    {\setstretch{1.5}
+
+
+        \include{Contents/1-introduction.tex}
+        
+        \include{Contents/2.5-literature.tex}
+
+        \include{Contents/2-theory.tex}
+
+        \include{Contents/3-researchquestions.tex}
+
+        \include{Contents/4-methods.tex}
+
+        \include{Contents/5-results.tex}
+        
+        \include{Contents/6-discussion.tex}
+
+        \newpage
+    }
+    \bibliographystyle{ieeetr}
+    \bibliography{Contents/references.bib}
+
+    \include{Contents/appendix.tex}
+
+    \section{Acknowledgements}
+    \setstretch{1.5}
+    I would like to thank dr. ir. R. Poppe for his help and feedback throughout the 
+    research process. I would also like to thank ML6, and specifically Laurens Weijs, 
+    for the opportunity to perform such an interesting research project and the 
+    continued guidance throughout the whole process. Furthermore, I would like to 
+    thank Raphael Fortunato for the companionship during the last nine months throughout the 
+    whole project and for showing me the strong benefits of using open-source software
+    and linux based systems. 
+    I would also like to thank Sofie Bracher for her help with making a very specific
+    figure. Finally, I would like to thank Tine Meerdink, whose strong academic and 
+    writing skills have helped me think critically about my thesis and for the general 
+    support during the last months. 
+
+
+
+\end{document}  

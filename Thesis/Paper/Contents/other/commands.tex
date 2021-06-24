@@ -1,0 +1,19 @@
+\newcommand\mysection[1]{\section*{#1}%
+\addcontentsline{toc}{section}{\protect\numberline{}#1}%
+\def\leftmark{#1}}
+
+\newcommand\mysubsection[1]{\subsection*{#1}%
+\addcontentsline{toc}{subsection}{\protect\numberline{}#1}%
+\def\leftmark{#1}}
+
+\newcommand\mysubsubsection[1]{\subsubsection*{#1}%
+\addcontentsline{toc}{subsubsection}{\protect\numberline{}#1}%
+\def\leftmark{#1}}
+
+\newcommand{\fakesection}[1]{%
+  \par\refstepcounter{section}% Increase section counter
+  \sectionmark{#1}% Add section mark (header)
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}% Add section to ToC
+  % Add more content here, if needed.
+}
+

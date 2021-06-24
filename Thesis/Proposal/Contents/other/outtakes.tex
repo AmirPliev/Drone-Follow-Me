@@ -1,0 +1,124 @@
+\subsubsection{Mean Average Precision}
+An important measure with which to compare different object detection models is 
+the mean average precision (mAP) \cite{mAP}. This metric is based on the average 
+precision (AP) metric. This method uses the precision and recall of the model 
+in order to determine how good the model performs. Both these measures look 
+at the prediction matrix of a model. This prediction matrix considers 4 classes 
+of possible predictions that the model can make. True positives (TP), which is when 
+the model predicted a class and this class was correct. False positives (FP), when the 
+predicted class was not the same as the ground truth. Vice versa, the same concepts 
+apply for rue negatives (TN) and false negatives (FN). What predictions fall under 
+which type, depends on the threshold that the confidence values for each predictions 
+are set. Since the goal of object detection is to predict a bounding box with the 
+correct class, the predicted bounding box can have a certain margin of error. How 
+close the model is to the ground truth before it is considered a correct prediction, 
+is measured using the Intersection over Union (IoU):
+
+\begin{equation}
+    IoU = \frac{Area of Overlap}{Area of Union}
+\end{equation}
+
+Setting a threshold for how large this number is in order to be considered a 
+correct classification, can have different effects on the prediction matrix. 
+With this information, we can calculate the precision using: 
+
+\begin{equation}
+    Precision = \frac{TP}{TP + FP}
+\end{equation}.
+
+This can be intuitively explained as the amount of times that a correct prediction 
+has been made out of all predictions. Next to this, the recall of a model is defined as 
+
+\begin{equation}
+    Recall = \frac{TP}{TP + FN}
+\end{equation}.
+
+Recall is intuitively defined as the amount of correctly predicted classes, 
+from all the ground truth classes. Having the precision and recall, the average 
+precision metric is calculated by taking $N$ amount of recall values and averaging 
+the precision value corresponding to them. However, the problem in object detection 
+models is that the IoU threshold is arbitrarily chosen, and choosing different 
+values can have different effect on the accuracy. For this reason, for a set of 
+different IoU threshold, the AP is calculated. This is performed for each class separately.
+The resulting APs per threshold is averaged, resulting in a mean AP for each class. 
+Finally, taking the average of all these mAPs per classes can be used to calculate the 
+performance of the model as a whole. 
+
+
+
+\subsubsection{Pruning and Efficient Network Architecture}
+An established method of optimizing existing networks to perform faster has been 
+to prune the networks \cite{pruning}. Pruning a network can take multiple forms but 
+at their core they try to identify the parameters of a network that contribute to the 
+determining of the output as least as possible. A certain proportion of these 
+parameters are then discarded which results in a reduction in accuracy. To make up 
+for this reduction in accuracy, the model is trained more and the process is repeated. 
+
+There are a number of ways in which pruning can be applied. The pruning process can 
+either be applied to single parameters or to larger structures. The application of 
+single parameter pruning can result in very sparse neural networks which do not 
+always decrease inference time when used in the context of some libraries which 
+use dense computation to perform the neural network operations. In these cases, the 
+pruning of larger structures, such as neurons, filters or channels would 
+be more effective. Since the goal for this thesis is to improve speed and the 
+storage is not as important, the preference would go towards performing the 
+pruning structurally. 
+
+The way in which parameters are weighted for their importance. This is done 
+by giving each parameter a score and then pruning parameters under a certain 
+threshold. However, this score can vary. It is possible to use the absolute values
+of the parameters, or the contributions of each parameter to the network gradients. 
+Taking the $N$ percentage of parameters that contribute the least according to this
+metric and omitting them can result in decreased computational load. However, the 
+choice of where to take that fraction also has an impact. This can be done locally 
+in a substructure or globally for the entire network. 
+
+Since the object detector models that have been mentioned previously have already 
+been subjected to pruning methods and more complicated compression techniques, these 
+models are not the focus of this thesis. However, the RL algorithm that will be 
+trained could use some of these pruning techniques. Not many attempts have yet been 
+made to apply pruning techniques to the neural networks operating in RL agents. 
+The need for these algorithms to operate on EDs and the corresponding reduction 
+in computational load is therefore still relevant. 
+
+\subsection{Fine-tuning}
+As mentioned before, RL is very suitable for situations 
+in which there is little available information and the patterns can not be 
+directly inferred. However, at the same time, this method is very data hungry, 
+requiring a vast amount of experiences in order to successfully learn. Keeping in
+mind that the drone needs to be implemented into various real life applications,
+this becomes a problem. Gathering training data in real-life would take an 
+exceptional amount of time. In order to counter this problem, the use of 
+simulated environments could potentially present a solution \cite{DroneRLUsingTransferLearning}. By using these simulations, 
+where a quadcopter drone can be situated and controlled, the necessary vast 
+amounts of training data can be collected and used for training the DDQN. However, 
+when it comes to deploying it onto the physical drone, there could 
+be a performance gap between the drone in a simulated environment and the drone in a 
+physical environment. Simulations lack a lot of detail that could potentially mislead the 
+simulation-trained agent in many situations. This leads to a lowered performance of 
+the agent in the desired real-world applications. 
+
+A well established solution to moving certain domain knowledge of a trained 
+network to another problem has been to use a pre-training and fine-tuning process \cite{pretrainingfinetuning}.
+This method is very much related to Transfer Learning \cite{DroneRLUsingTransferLearning},
+where already trained weights are used to initialize another network. This way, the knowledge 
+that the network has gained from the first training process, can be transferred to another 
+problem. Most of the time, only the last layers are available for training and the 
+secondary training process only needs to learn these last layers. Only the higher-level 
+features in the fully connected layers need to be relearned, allowing 
+for a large reduction of the training time needed in the real-world domain. A subset of these
+methods is to first train on a large dataset, to initialize a new network 
+with these same weights and then to continue fine-tuning the network for that specific 
+domain. This pre-training and fine-tuning process, allows for more flexibility in  
+fine-tuning the network to the desired domain and at the same time, reduces the 
+overall training time in the desired domain. 
+
+This means that, in the scope of this thesis,
+the pre-training process is to train the RL algorithms in a simulation environment and to 
+then finish training these networks on the physical drone. This could drastically 
+reduce the amount of time needed to train the physical drone, focussing on the optimization
+of the drone in the simulation environment instead. Performing this pre-training 
+and fine-tuning process has not been attempted yet to the domain of object tracking 
+drones. Previous attempts have only included the offline phase in a simulated environment.
+This makes the deployment of this system on a physical drone a relevant 
+investigation. 

@@ -1,0 +1,265 @@
+%todo: kerel wil iets over acties hebben
+
+
+\section{Discussion}
+In this section, we will discuss the overall conclusions that can be drawn from the 
+results in perspective of the posed research questions (Section \ref{RQs}). 
+After this, the limitations and problems of this thesis, 
+together with possible future work that could be performed will be discussed. 
+
+\subsection{Experiments and Research Questions}
+Looking at the experiments, the previously posed research questions will be addressed. 
+Each of these questions will be used as a perspective on the acquired results. 
+
+\subsubsection{Directionality}
+To start, the first research question investigated whether the use of stacked imaging 
+improved the training process and performance in the Follow-Me task.
+What has becomes clear, is that there is a benefit to stacking the frames. However, 
+there is a caveat that needs to be added, which is that the context in which 
+the agent is operating matters. 
+
+Looking at the results, the stacked normal image 
+agent outperformed the single image input model in the BlocksObstacles environment. 
+However, in the BlocksNormal environment, it did not. The reason for this difference 
+is that the stacking of the images as an input increased the state-space unnecessarily. 
+When the images are stacked, the state-space is increased drastically. The 
+expectation was that this increase would nonetheless provide sensible information that 
+the drone could use to learn the required behavior faster and better. However, 
+the lack of this observation in the obstacle-free environment, but the presence of it 
+in the BlocksObstacles environment, confirms that this increase is only relevant 
+in certain environments. Specifically, agents trained in environments that require 
+the agent to handle obstacles are aided with this new state-representation. Such results 
+emphasize that overall increases in state-spaces of an RL problem should be accompanied 
+with valuable information for the agent to better optimize its reward. If this is already 
+possible without this increased state-space, its learning process is only impeded. Such 
+impediments lead to problematic behaviors, as observed in the results. In both 
+environments that it was tested in, the agent taught itself a behavior that 
+positions itself next to the person. In both environments, this lead to problems 
+that the agent was not able to unlearn or deal with. This also lead to 
+a high number of collisions or out of view moments, making this agent 
+still prone to strong shortcomings. 
+
+These results further reinforce the usefulness of using stacked imaging as an 
+initial test for whether directionality in state-representation. Having been useful 
+in initial deep RL domains \cite{rlsolvingatari}, its potential is further 
+enforced in this thesis. At the same time, its shortcomings in more complex tasks 
+are also laid bare. Seeing as this technique is a very straight-forward communication 
+of the required information to the agent about moving objects, there are still questions 
+about how to perform this more efficiently. This thesis has shown that such techniques 
+are only beneficial when their impact on the state-space is mitigated by the possible 
+benefits that they could add. In the specific task of follow-me behavior, this specific 
+technique was not significantly more beneficial compared to its absence. However, these 
+results nonetheless show promising results for the 
+testing of more complex solutions in solving this task, such as the earlier presented 
+RNN implementations \cite{RLenLSTMfordrone, LSTMinRL}. 
+
+In conclusion, possible benefits from using state-representations that 
+include information about the directionality of objects within the environment 
+can provide valuable information to the agent to perform follow-me behavior. 
+However, the overall benefits compared to using a single image are not convincing, 
+and there is room for better techniques to be implemented to deal with this type of 
+information. 
+
+\subsubsection{Obstacle Avoidance} 
+Next, the influence of depth maps in state-representation in the task of 
+follow-me behavior has been tested. Overall, the results show 
+implementing such information in the state-representation has significant 
+benefits for the training process and its overall learned behavior. 
+
+Looking at the results, the depth agents have either performed equally to, 
+or even better than, the baseline in each of the environments. On top of this, 
+the expected degradation in performance, was not matched by these agents, showing 
+that they have been able to perform above what could be expected of them in 
+each environment. Furthermore, compared to their normal image counterparts, the 
+depth agents learned positive behavior the fastest compared to the others in some 
+environments. These benefits stem from the fact that this change in state-space 
+leads to simplifying the relevant information for the agent to behave well, the antithesis of 
+the problems that stacking the images caused. 
+To explain, two important aspects are required for the agent to perform follow-me behavior 
+adequately. The drone should be able to sense the target object to follow and 
+it should be able to sense its surroundings in order to see whether objects 
+are in its way. The implementation of depth maps simplifies this latter 
+information. Where normal images can represent walls in a variety of combinations 
+of pixel values, depth maps represent these areas by their distances alone. 
+With this, the information is simplified and it becomes easier for the 
+drone to map such states to appropriate actions. 
+
+These advantages translate to their learned behavior as well. In both the BlocksNormal
+and the BlocksObstacles environments, this agent outperformed all the other agents. 
+With very stable movements and 
+keeping a close route to the person's walking path, this agent has been able to 
+find better optima in its search for behavior that maximizes the reward. Compared to 
+the normal image models, depth map agents had no problems with hallway situations, 
+where no collisions have been recorded. On top of this, these agents also 
+showed a slight improved ability to learn to avoid corners, having less problems 
+with these situations than the other agents. Nonetheless, there are still points of 
+improvements in this aspect, as these agents were not able to deal with corners 
+adequately. 
+
+The advantage to using depth maps over normal images has not been researched in 
+the context of follow-me behavior. However, previous implementations using 
+depth-maps to aid agents (including other vehicles) have been shown to be 
+successful \cite{AirSimDroneNavigation, DepthAndStackResearch}. Their use  
+has shown that agents can benefit from being able to sense surrounding objects 
+when this is required for a task to be completed. In the context of follow-me 
+behavior, this thesis has presented the benefits to this specific task. Nonetheless, 
+there is still room to explore other technique that sense objects, as mentioned before \cite{acousticdronefollower,lidarinselfdrivingcar}.
+
+Concluding, the results confirm the hypothesis that the addition of depth images 
+as a means to replace a normal images, is a positive influence on the performance and 
+training of a RL agent in the task of follow-me behavior. 
+
+\subsubsection{Baseline}
+Next, the third research question addressed the advantage of using RL methods 
+over a heuristic inspired baseline. The results have shown that in cases where 
+the perfect behavior has been adapted for, there are minimal differences between 
+RL algorithms and agents that behave according to static rules. However, when 
+adaptive behavior is required in exceptional situations, this difference is increased 
+in the favor of RL method. 
+
+Emphasizing this more strongly, the results have shown that in the BlocksNormal environment, 
+where no obstacles are present, the set of rules that determine the baseline's behavior 
+are sufficient to behave adequately. RL agents, in this context, are nonetheless able to 
+match this. However, when obstacles have been added, this changes. Baseline methods 
+are unable to adapt, as expected, and the advantages of trained RL agents are visible. 
+Their degradation in performance was much less compared to the baselines degradation, showing 
+that these agents have been able to adapt their behavior accordingly in these new situations. 
+This is further explained by the behaviors that the agents exhibited. 
+The baseline agent, with its static behavior, has specific problems that it is 
+not able to deal with. However, RL agents have shown an ability to adapt 
+their behavior to different situations, resulting in better performances overall. 
+Even though problems persisted with the RL agents, their ability to adapt 
+according to their environment shows the clear advantage that RL has over 
+heuristic based approaches where new programming is required for each new 
+situation. 
+
+Looking at previous research in object tracking using similar heuristic rules \cite{DroneFollowUsingPhone, acousticdronefollower, DroneFollowMobileObject, VisualGPS},
+it becomes clear that adaptive behavior is still very relevant, especially for 
+dynamic object tracking tasks. Even though additional technologies improve 
+the conditions in which these agents operate, their static foundation still 
+can be improved using adaptive learning methods, such as RL. This thesis has 
+presented the clear benefits of training such agents in these settings as opposed 
+to adapting baselines. 
+
+In conclusions, these findings reinforce the 
+hypothesis that RL do provide advantages over more pre-programmed approaches in 
+performing follow-me behavior. 
+
+\subsubsection{Generalizability}
+Finally, the last research question studied the generalizability of RL from simpler 
+environments to more complex environments. Agents trained in simpler environments, have been 
+tested in a more complex environment to see how much of the behavior has been transferred 
+to these new situations. The results showed that RL methods do 
+have generalizability, but show limits to the situations it can correctly infer. 
+
+Specifically looking at the agent that was trained in BlocksNormal, it showed that 
+it was strongly perturbed in the Warehouse environment. Not having 
+seen these states during training, the agent is unfamiliar with these new states 
+and performs unexpected behavior that was not 
+observed in the training environment. RL agents trained in obstacle-free environments 
+are therefore unable to generalize their behavior to environments where obstacles 
+are present. On the other hand, the agent trained in BlocksObstacles, showed much 
+more behavior transfer to the Warehouse environment. Although its
+average return showed marginal improvement, its behavior showed many similarities 
+when compared to its performance in its own environment. The difference between 
+training an agent and transferring its knowledge seemed marginal as well, giving 
+promising results for the ability of RL to generalize learned behavior to more 
+complex situations. 
+
+Looking at earlier attempts at transferring behavior to new environments \cite{DroneRLUsingTransferLearning}, 
+shortcomings were observed regarding state-space. The use of normal images 
+showed reduced generalizability to new environments, especially when colors and 
+textures were changed. In this study, the agents have been trained using depth imaging 
+and their generalizability has been tested. The generalizability of these agents has 
+shown promising results and show the ability of RL agents to perform adaptive 
+behavior to more complex environments. Furthermore, tests about whether RL agents 
+are able to be trained in simple environments, and transfer this behavior to more 
+complex environments have been missing. 
+
+Many studies have shown problems with 
+models developed in simulation environments being transferred to the real world \cite{DroneRLUsingTransferLearning, RLenLSTMfordrone}. 
+The increase in complexity in this transition is an impediment to many agents that 
+have been developed for a variety of tasks. The development of adaptive agents that 
+are able to flexibly transfer behavior to real-world application is still relevant. 
+The findings of this study have shown potential indications that RL agents are 
+able to perform such adaptable behaviors. 
+
+The findings in this study further emphasize the 
+utility of using RL agents in developing more general behavior to be used in 
+a variety of situations. Especially considering the comparison with baselines, 
+where such behavior require pre-programming. 
+
+
+\subsection{Limitations and Future Work}
+Some topics of improvement require further attention. This dissertation has 
+shown the overall usefulness of RL in the task of follow-me behavior. However, 
+some elements could use some more in-depth research. 
+
+To start, even though the implementation of the DQN has shown promising results 
+in learning behavior, there might be some drawbacks to using this type of learning. 
+As has been seen in the results, the best performing agents still struggled with 
+some situations. The reasons for these struggles are most likely caused by a bias in 
+the memory buffer of the DQN agent towards situations that occur most often. 
+This lends itself to studying whether training methods that include weight experiences, 
+such as Prioritized Experience Replay \cite{prioritizedreplay}, could improve 
+the behavior sufficiently to solve these issues. Furthermore, other agents learn 
+using different methods, some of which being without a memory buffer \cite{A3C, PPO,SAC}. 
+Potential future work could investigate whether these agents are valuable additions 
+in improving the drone's behavior. 
+
+Furthermore, the action space of the agent in this study has been turned discrete 
+as a means to implement the DQN. Relevant actions have been included in order to 
+perform basic movements in the environment. However, there is also the possibility 
+to give agents full control of the continuous actions space of a drone. Specific 
+directions and velocities could be variables that an agent could take control of 
+to ensure more stable behavior. Additional, vertical flight paths as a means to improve 
+person centering could also be implemented. The ability of RL agent to take control of 
+continuous action spaces has been shown previously \cite{FrontalViewRL, AirSimDroneNavigation}. 
+Interesting research could be performed about whether RL agents with abilities to 
+handle continuous spaces \cite{A3C, PPO, SAC, DDPG} could perform follow-me behavior. 
+
+Moving on, as shown in the results, the reward function is a fundamental element 
+when it comes to the behavior that is learned. For RL algorithms, the goal behavior is 
+synonymous with maximizing the reward function \cite{RLBook}, meaning that the reward 
+function has an essential relationship with the learned behavior. In this thesis, 
+the choice has been made for a sparse reward function because of the possible problems 
+that could be encountered with using the alternative manually shaped reward functions 
+\cite{sparserewardsarebetter,nonsparserewardissuboptimal}. However, as shown in the 
+results, even within the specific reward function created in these experiments, there 
+is room for further shaping. Restricting the rewards even more changed the behavior 
+of the agent measurably. There could still be different reward functions that could 
+improve overall behavior in ways as to reduce collisions and other problems. Such 
+investigation have fallen outside of the scope of this research, but they could 
+be an inspiration for future work in developing follow-me behavior. 
+
+Next, the techniques used to test different state-representations have shown 
+promising results, but more research could be done in different types of 
+techniques. As mentioned before, the use of stack imaging is a straight-forward 
+approach to providing an agent with information about dynamic objects \cite{rlsolvingatari,DepthAndStackResearch}, 
+however, there are still others that could improve overall results. Different 
+architectures of RNNs could be implemented to improve these skills. Furthermore,
+with the goal of further deployment in real world applications, there is still 
+considerable room for future work into different methods of creating depth maps, 
+as there is always some margin of error in such methods \cite{lidarinselfdrivingcar, stereovision, DepthFromMonocularImage}.
+
+Finally, one shortcoming of RL algorithms is that they suffer from results that 
+are hard to reproduce \cite{RLisSuperannoying}. 
+RL is extremely sensitive to changes in the hyperparameters leading to completely 
+different results. Considering the fact that in the scope of this thesis, no 
+hyperparameters search has been performed, it is not clear that these results 
+are completely optimal. However, since the goal has been to test the agents 
+in comparison to baseline methods, these problems fall out of the scope of this thesis, 
+but could potentially pose problems in further deployment of similar models. 
+
+\subsection{Conclusion}
+To conclude, this thesis has investigated to what extent the use of Reinforcement Learning
+is a viable method for follow-me behavior using an autonomous drone. The 
+results have shown that there is potential in using RL methods for this task, especially 
+over straight-forward static approaches. Furthermore, implementing state-representations 
+that incorporate information about the dynamic movements of objects and their distances, 
+show strong advantages over RL algorithms that solely rely on camera inputs. Adding to 
+this, the abilities of RL agents to transfer their behavior to more complex environments, show 
+potential for the development of agents that teach themselves more general behavior to be 
+applied in a larger variety of situations. Even though 
+future work is required before deployment into real-world applications is possible, 
+the use of RL shows strong advantages in the adaptive decision-making processes and generalizability. 

@@ -1,0 +1,57 @@
+\section{Research Questions}
+The main focus of this thesis will be to implement, optimize and evaluate a system 
+that can control a physical drone in order to track and follow a person. The goal here is 
+to propose a pipeline that will be implemented on an ED, containing low computational power as a constraint.  
+The pipeline looks as follows. First, the system will contain an object 
+detector that can specifically locate a person in real-time. Next to this, the option 
+of having a depth-image created and fed to the RL agent, together with the coordinates 
+of the located person, will be available. Using this information, the system then needs 
+to decide on what action to take in relation to the position of the person and possible obstacles. 
+This will be implemented in two phases. The system will implemented and trained in a virtual 
+environment in an offline phase. Afterwards it will be deployed on a physical drone 
+to observe whether the optimized learning process translates to a new domain. 
+In order to formalize this process, the following research questions have been defined. 
+
+\subsection{Training a Reinforcement Learning algorithm with Hindsight Experience Replay}
+The RL agent being implemented in a domain with sparse rewards means that the need for 
+some optimization techniques are required. Learning in these environments is harder 
+but fortunately, this problem has seen a recent breakthrough, which has been the 
+aforementioned Hindsight Experience Replay (HER). This algorithm allows the 
+agent to also learn from experiences where the task was not performed successfully. 
+The results would hopefully show that the implementation of this method during 
+learning will speed up the learning process and improve overall performance. The goal
+here is to compare the learning process of an RL agent that has implemented the HER 
+method, with one that did not. 
+
+\begin{quote}
+    \label{research1}
+    1 $-$ \textit{Does Hindsight Experience Replay improve the training time of the RL agent for the task of following a person?}
+\end{quote}
+
+\subsection{Using depth-images as a state-space}
+The desired behavior would preferably not only be to follow a person, but to also 
+successfully identify and avoid objects that are in the way. The biggest problem 
+is that the RL agent would require some type of input that could relay that information 
+about possible obstacles to the agent. The use of depth-imaging has been used to 
+in this application, however whether this improves the performance of the agent or 
+reduces training time is unclear. This thesis will investigate whether using depth-imaging 
+increases the average reward of the agent compared to the use of 
+direct image input for the RL agent. 
+
+\begin{quote}
+    \label{research2}
+    2 $-$ \textit{Does the use of depth-images significantly improve the performance of the RL agent?}
+\end{quote}
+
+\subsection{Deployment in online phase}
+The goal is to have this system deployed on a physical drone that can perform 
+the same task. The effects of the optimization techniques that have been 
+implemented in the earlier questions on the simulated environment would also be 
+expected to increase their performance when deployed on the physical drone. 
+Whether the optimizations techniques can be said to have translated to the 
+physical drone is to be investigated. 
+
+\begin{quote}
+    \label{research3}
+    3 $-$ \textit{Does the model with the proposed optimizations perform similarly on a physical drone?}
+\end{quote}

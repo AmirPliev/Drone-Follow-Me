@@ -1,0 +1,76 @@
+\section{Research Questions} \label{RQs}
+In this section, the research focus of this thesis will be discussed, together 
+with the sub-problems that will divide the main problem. This thesis will 
+investigate the following question. 
+
+\begin{quote}
+    \label{mainresearch}
+    Main $-$ \textit{To what extent is the use of Reinforcement Learning in the task 
+    of Follow-Me behavior applicable and beneficial?}
+\end{quote}
+
+\noindent In order to formalize the 
+process of answering this question, the next sub-questions are defined.
+
+\subsection{Directionality}
+Since the target object is a dynamic moving object, the need to implement some type 
+of directionality information, as described in Section \ref{directionality}, in 
+the state representation is required. In this thesis, the choice has been made to 
+implement a stack of images as means to convey this information.
+Doing this could improve the training process, in speed and convergence, and could 
+also alter the way in which the follow-me behavior is being performed. From the 
+literature, it is still 
+unclear whether the agent will be benefited by adding this in the input regarding 
+successful follow-me behavior. In order to investigate this, an implementation 
+of an agent trained on state-representation containing directionality will be tested 
+to answer the following question. 
+
+\begin{quote}
+    \label{research1}
+    1 $-$ \textit{Does the implementation of stacked images as state-representation improve 
+    an RL agent's training and performance in follow-me behavior?}
+\end{quote}
+
+\subsection{Obstacle Avoidance}
+The desired behavior would preferably not only be to follow a person, but to also 
+successfully identify and avoid objects that are in the way. Therefore, we will 
+implement a type of state-representation that can convey to the RL agent information 
+about where potential obstacles are. For this, state-representations will be changed from 
+normal images to depth maps as an implementation of this object sensing. Implementing this, 
+allows us to see whether this has 
+an influence on the training process or the learned behavior and help answer the second 
+research question. 
+
+\begin{quote}
+    \label{research2}
+    2 $-$ \textit{Does the implementation of dept maps as state-representation improve 
+    the performance of the RL agent in the context of follow-me behavior?}
+\end{quote}
+
+\subsection{Baseline Comparison}
+Another aspect that will be investigated is the benefit of using Reinforcement Learning 
+compared to a baseline model. Overall, the goal is to see whether Reinforcement Learning 
+works in the context of follow-me behavior. An interesting approach to answering this 
+question is to see how the best working RL agent works compared to a pre-programmed 
+baseline model similar to the techniques used in previous studies. 
+
+\begin{quote}
+    \label{research3}
+    3 $-$ \textit{Does the use of Reinforcement Learning provide any benefit over a 
+    baseline agent?}
+\end{quote}
+
+\subsection{Generalizability}
+Finally, to see whether the agent is able to generalize its learned behavior to new,  
+more complex environments, the agents will be tested in previously unseen situations.
+By training agents in environments where systematic obstacles have been added and 
+consequently testing them in more complex environments, conclusions can be drawn 
+about how much of the behavior from the previous environment is transferred. 
+
+\begin{quote}
+    \label{research4}
+    4 $-$ \textit{Do Reinforcement Learning agents generalize their behavior in
+    an unseen and more complex environment?}
+\end{quote}
+
+
