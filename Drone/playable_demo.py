@@ -13,7 +13,7 @@ import Auxilaries.Environments.Additionals.RewardFunctions as Rewards
 
 
 """ Open environment """ 
-env = Environment(  reward_fn       = Rewards.BoundingBoxHeight,
+env = Environment(  reward_fn       = Rewards.SimpleSparseClose,
                     reset_method    = Parameters.Reset_Method.Directly_Behind_Person,
                     stack_on        = True,
                     depth_on        = True,
